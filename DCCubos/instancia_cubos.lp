@@ -1,0 +1,43 @@
+bloque(1..20).
+
+sobre(1,mesa,0).
+sobre(2,1,0).
+sobre(3,mesa,0).
+sobre(4,3,0).
+sobre(5,mesa,0).
+sobre(6,5,0).
+sobre(7,mesa,0).
+sobre(8,7,0).
+sobre(9,mesa,0).
+sobre(10,9,0).
+sobre(11,mesa,0).
+sobre(12,11,0).
+sobre(13,mesa,0).
+sobre(14,13,0).
+sobre(15,mesa,0).
+sobre(16,15,0).
+sobre(17,mesa,0).
+sobre(18,17,0).
+sobre(19,mesa,0).
+sobre(20,19,0).
+objetivo(T) :-
+ sobre(1,mesa,T),
+ sobre(2,1,T),
+ sobre(3,2,T),
+ sobre(4,3,T),
+ sobre(5,mesa,T),
+ sobre(6,5,T),
+ sobre(7,6,T),
+ sobre(8,7,T),
+ sobre(9,mesa,T),
+ sobre(10,9,T),
+ sobre(11,10,T),
+ sobre(12,11,T),
+ sobre(13,mesa,T),
+ sobre(14,13,T),
+ sobre(15,14,T),
+ sobre(16,15,T),
+ sobre(17,mesa,T),
+ sobre(18,17,T),
+ sobre(19,18,T),
+ sobre(20,19,T).

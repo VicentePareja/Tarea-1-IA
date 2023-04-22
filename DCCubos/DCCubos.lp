@@ -2,16 +2,6 @@
 % 'bound' es un número arbitrario que representa el límite superior del intervalo de tiempo.
 tiempo(0..bound).
 
-% Definición de los bloques que formaran parte del problema.
-bloque(a).
-bloque(b).
-bloque(c).
-bloque(d).
-bloque(e).
-bloque(f).
-bloque(g).
-bloque(h).
-
 % Definición de los lugares donde se pueden colocar los bloques.
 lugar(X) :- bloque(X).
 lugar(mesa).
@@ -20,7 +10,7 @@ lugar(mesa).
 % se puede ejecutar un movimiento posible de un bloque X a un lugar Y, siempre que T 
 % sea diferente de 'bound'. Con la restricción de cardinalidad se asegura que no se
 % ejecuten más de un movimiento en cada instante de tiempo.
-0{ejecutar(X,Y,T) : movimientoposible(X,Y,T)}1 :- tiempo(T), T!=bound.
+0{ejecutar(X,Y,T) : movimientoposible(X,Y,T)}brazos :- tiempo(T), T!=bound.
 
 % Estas líneas definen los bloques que están siendo movidos en un instante de tiempo T y sus destinos.
 origen_movimiento(X,T) :- ejecutar(X,Y,T).
@@ -58,17 +48,11 @@ movimientoposible(X,mesa,T) :- bloquelibre(X,T), not sobre(X,mesa,T).
 % los bloques no se encuentran en la configuración objetivo.
 :- not objetivo(bound).
 
-% Condiciones iniciales
-sobre(f,mesa,0).
-sobre(g,mesa,0).
-sobre(h,mesa,0).
-sobre(e,mesa,0).
-sobre(d,mesa,0).
-sobre(a,mesa,0).
-sobre(b,a,0).
-sobre(c,b,0).
+% no se puede mover más de un bloque a la vez que proviene de la misma torre.
+:- ejecutar(X1,Y,T), ejecutar(X2,Y,T), X1 != X2, tiempo(T).
 
-% Objetivo
-objetivo(T) :- sobre(c,b,T), sobre(b,a,T), sobre(a,e,T), sobre(e,mesa,T).
+% no se puede mover más de un bloque hacuia la misma torre.
+:- ejecutar(X,Y1,T), ejecutar(X,Y2,T), Y1 != Y2, tiempo(T).
 
 #show ejecutar/3.
+% #minimize {1,bound : ejecutar(X,Y,T)}
